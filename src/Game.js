@@ -13,7 +13,8 @@ class Game extends Component {
         super(props)
         this.state = {
             mysteryWord: Game.generateMysteryWord(),
-            letters: Game.generateLetters(),
+            keyboardLetters: Game.generateLetters(),
+            testedLetters: [],
             playerTry: 0
         }
     }
@@ -28,42 +29,42 @@ class Game extends Component {
     }
 
     static generateMysteryWord () {
-        let mysteryWord = 'crocrodile'
+        const words = ['navigateur', 'tortue', 'poisson', 'saucisse', 'console', 'programmation', 'informatique']
+        const mysteryWord = words[Math.floor(Math.random() * words.length)]
 
         return mysteryWord.split('')
     }
 
     handleLetterClick = (letter) => {
-        const {playerTry, letters} = this.state
-        const letterIndex = letters.findIndex(obj => obj.letter === letter)
+        const { playerTry, keyboardLetters, testedLetters } = this.state
+        const letterIndex = keyboardLetters.findIndex(obj => obj.letter === letter)
 
-        letters[letterIndex].tested = true
+        keyboardLetters[letterIndex].tested = true
+        testedLetters.push(letter)
+
         this.setState({
             playerTry: playerTry + 1,
-            letters: letters
+            keyboardLetters: keyboardLetters,
+            testedLetters: testedLetters
         })
     }
 
     render () {
-        const {letters, playerTry, mysteryWord} = this.state
-        // const won = mysteryWord.length === mysteryWord.filter(letter => (testedLetters.includes(letter))).length
+        const { mysteryWord, keyboardLetters, testedLetters, playerTry } = this.state
+        const won = mysteryWord.length === mysteryWord.filter(letter => (testedLetters.includes(letter))).length
 
         return (
             <div className="game">
                 <div className="board">
-                    <Counter playerTry={playerTry} />
-                    <MysteryWord
-                        mysteryWord={mysteryWord}
-                        gameLetters={letters}
-                    />
+                    <Counter playerTry={playerTry}/>
+                    <MysteryWord mysteryWord={mysteryWord} testedLetters={testedLetters}/>
                 </div>
 
-                <HumanFrame playerTry={playerTry} />
+                <HumanFrame playerTry={playerTry}/>
 
-                <KeyBoard
-                    letters={letters}
-                    onClick={this.handleLetterClick}
-                />
+                {!won && <KeyBoard keyboardLetters={keyboardLetters} onClick={this.handleLetterClick}/>}
+
+                {won && <div><p>Victoire !</p></div>}
             </div>
         )
     }

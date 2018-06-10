@@ -11,8 +11,7 @@ class HumanFrame extends Component {
     }
 
     render () {
-        const playerTry = this.state.playerTry
-        const peer = playerTry % 2 === 0
+        const { playerTry } = this.state
 
         return (
             <div className="human-frames">
@@ -22,7 +21,6 @@ class HumanFrame extends Component {
                     /´\<br/>
                 </p>
 
-                {peer && <span>aie !</span>}
                 {playerTry >= 26 && <span>Game Over</span>}
             </div>
         )

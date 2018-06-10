@@ -8,18 +8,18 @@ class KeyBoard extends Component {
     constructor (props) {
         super(props)
         this.state = {
-            letters: props.letters,
+            keyboardLetters: props.keyboardLetters,
             onClick: props.onClick
         }
     }
 
     render () {
-        const letters = this.state.letters
+        const { keyboardLetters } = this.state
 
         return (
             <div className="keyboard">
                 {
-                    letters.map(({letter, tested}) => (
+                    keyboardLetters.map(({letter, tested}) => (
                         <button
                             className='key-letter'
                             key={letter}
@@ -36,7 +36,7 @@ class KeyBoard extends Component {
 }
 
 KeyBoard.propTypes = {
-    letters: PropTypes.arrayOf(
+    keyboardLetters: PropTypes.arrayOf(
         PropTypes.shape({
             letter: PropTypes.string.isRequired,
             tested: PropTypes.bool.isRequired

@@ -9,15 +9,12 @@ class MysteryWord extends Component {
         super(props)
         this.state = {
             mysteryWord: props.mysteryWord,
-            gameLetters: props.gameLetters
+            testedLetters: props.testedLetters
         }
     }
 
     render () {
-        const {gameLetters, mysteryWord} = this.state
-        const testedLetters = gameLetters.map(({letter, tested}) => {
-            return tested ? letter : null
-        })
+        const { testedLetters, mysteryWord } = this.state
 
         return (
             <div className="mystery-word">
@@ -37,7 +34,7 @@ class MysteryWord extends Component {
 
 MysteryWord.propTypes = {
     mysteryWord: PropTypes.array.isRequired,
-    gameLetters: PropTypes.array.isRequired
+    testedLetters: PropTypes.array.isRequired
 }
 
 export default MysteryWord
