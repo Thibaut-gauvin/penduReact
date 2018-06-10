@@ -1,0 +1,13 @@
+version: '3.2'
+
+services:
+
+    node:
+        image: node:9-jessie
+        restart: "no"
+        ports:
+            - "3000:3000"
+        volumes:
+            - "$PWD:/home/docker"
+        working_dir: "/home/docker"
+        user: "node"

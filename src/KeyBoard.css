@@ -1,0 +1,21 @@
+.keyboard {
+    border: 1px solid black;
+    width: 100%;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: flex-start;
+    align-items: center;
+}
+
+.key-letter {
+    border: none;
+    background: none;
+    font-size: 28px;
+    line-height: 28px;
+    height: 32px;
+    width: 32px;
+    text-transform: uppercase;
+}
