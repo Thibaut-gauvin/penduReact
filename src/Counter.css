@@ -1,5 +1,15 @@
 .counter {
     display: flex;
     justify-content: flex-end;
-    padding: 5px;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.counter p span {
+    font-weight: bold;
+}
+
+.counter p {
+    margin: 0;
+    font-size: 25px;
 }

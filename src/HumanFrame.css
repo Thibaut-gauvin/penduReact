@@ -1,9 +1,10 @@
 .human-frames {
     height: 250px;
-    width: 50%;
+    width: 40%;
     background-color: darkgrey;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }

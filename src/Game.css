@@ -8,3 +8,9 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
 }
+
+.board {
+  height: 250px;
+  width: 60%;
+  background-color: aliceblue;
+}

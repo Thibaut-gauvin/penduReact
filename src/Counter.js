@@ -1,14 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './Counter.css'
+import PropTypes from 'prop-types'
 
-class Counter extends Component {
-    render () {
-        return (
-            <div className="counter">
-                <p>Count: 0</p>
-            </div>
-        )
-    }
+const Counter = ({playerTry}) => (
+    <div className="counter">
+        {playerTry < 26 && <p><span>Tentatives:</span> {playerTry}</p>}
+        {playerTry >= 26 && <p><span>Perdu :'( Tentatives:</span> {playerTry}</p>}
+    </div>
+)
+
+Counter.propTypes = {
+    playerTry: PropTypes.number.isRequired,
 }
 
 export default Counter
