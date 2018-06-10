@@ -10,7 +10,7 @@ const Counter = ({playerTry}) => (
 )
 
 Counter.propTypes = {
-    playerTry: PropTypes.number.isRequired,
+    playerTry: PropTypes.number.isRequired
 }
 
 export default Counter

@@ -14,28 +14,28 @@ class Game extends Component {
         this.state = {
             mysteryWord: Game.generateMysteryWord(),
             letters: Game.generateLetters(),
-            playerTry: 0,
+            playerTry: 0
         }
     }
 
     static generateLetters () {
-        return ALPHABET.split("").map((letter) =>{
+        return ALPHABET.split('').map((letter) => {
             return {
                 letter: letter,
                 tested: false
-            };
+            }
         })
     }
 
     static generateMysteryWord () {
         let mysteryWord = 'crocrodile'
 
-        return mysteryWord.split("")
+        return mysteryWord.split('')
     }
 
     handleLetterClick = (letter) => {
-        const { playerTry, letters } = this.state
-        const letterIndex = letters.findIndex((obj => obj.letter === letter))
+        const {playerTry, letters} = this.state
+        const letterIndex = letters.findIndex(obj => obj.letter === letter)
 
         letters[letterIndex].tested = true
         this.setState({
@@ -45,11 +45,7 @@ class Game extends Component {
     }
 
     render () {
-        const { letters, playerTry, mysteryWord } = this.state
-        const testedLetters = letters.map(({letter, tested}) => {
-            return tested ? letter : null
-        })
-
+        const {letters, playerTry, mysteryWord} = this.state
         // const won = mysteryWord.length === mysteryWord.filter(letter => (testedLetters.includes(letter))).length
 
         return (

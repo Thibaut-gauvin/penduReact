@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './HumanFrame.css'
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
 
 class HumanFrame extends Component {
     constructor (props) {
@@ -30,7 +30,7 @@ class HumanFrame extends Component {
 }
 
 HumanFrame.propTypes = {
-    playerTry: PropTypes.number.isRequired,
+    playerTry: PropTypes.number.isRequired
 }
 
 export default HumanFrame
