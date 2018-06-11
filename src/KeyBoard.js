@@ -23,7 +23,7 @@ class KeyBoard extends Component {
                         <button
                             className='key-letter'
                             key={letter}
-                            onClick={() => this.props.onClick(letter)}
+                            onClick={() => this.state.onClick(letter)}
                             disabled={tested}
                         >
                             { tested ? TESTED_SYMBOL : letter }

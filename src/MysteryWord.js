@@ -13,8 +13,17 @@ class MysteryWord extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        this.setState({
+            mysteryWord: nextProps.mysteryWord,
+            testedLetters: nextProps.testedLetters
+        });
+    }
+
     render () {
         const { testedLetters, mysteryWord } = this.state
+
+        console.log(mysteryWord)
 
         return (
             <div className="mystery-word">

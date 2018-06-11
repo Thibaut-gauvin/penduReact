@@ -5,6 +5,7 @@ import Counter from './Counter'
 import MysteryWord from './MysteryWord'
 import HumanFrame from './HumanFrame'
 import KeyBoard from './KeyBoard'
+import Score from './Score'
 
 const ALPHABET = 'abcdefghijklmnopqrstuvwxyz'
 
@@ -49,9 +50,26 @@ class Game extends Component {
         })
     }
 
+    handleNewGameClick = () => {
+        const newMysteryWord = Game.generateMysteryWord()
+        this.setState({
+            mysteryWord: newMysteryWord,
+            keyboardLetters: Game.generateLetters(),
+            testedLetters: [],
+            playerTry: 0
+        })
+    }
+
     render () {
         const { mysteryWord, keyboardLetters, testedLetters, playerTry } = this.state
         const won = mysteryWord.length === mysteryWord.filter(letter => (testedLetters.includes(letter))).length
+
+        let component
+        if (won) {
+            component = <Score onClick={this.handleNewGameClick}/>
+        } else {
+            component = <KeyBoard keyboardLetters={keyboardLetters} onClick={this.handleLetterClick}/>
+        }
 
         return (
             <div className="game">
@@ -62,9 +80,7 @@ class Game extends Component {
 
                 <HumanFrame playerTry={playerTry}/>
 
-                {!won && <KeyBoard keyboardLetters={keyboardLetters} onClick={this.handleLetterClick}/>}
-
-                {won && <div><p>Victoire !</p></div>}
+                {component}
             </div>
         )
     }
