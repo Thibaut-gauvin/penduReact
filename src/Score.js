@@ -3,7 +3,7 @@ import './Score.css'
 import PropTypes from 'prop-types'
 
 class Score extends Component {
-    constructor(props) {
+    constructor (props) {
         super(props)
         this.state = {
             onClick: props.onClick

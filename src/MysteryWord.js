@@ -13,11 +13,11 @@ class MysteryWord extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps (nextProps) {
         this.setState({
             mysteryWord: nextProps.mysteryWord,
             testedLetters: nextProps.testedLetters
-        });
+        })
     }
 
     render () {
