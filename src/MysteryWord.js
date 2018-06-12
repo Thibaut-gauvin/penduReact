@@ -23,8 +23,6 @@ class MysteryWord extends Component {
     render () {
         const { testedLetters, mysteryWord } = this.state
 
-        console.log(mysteryWord)
-
         return (
             <div className="mystery-word">
                 <p>
