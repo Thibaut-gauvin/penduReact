@@ -1,8 +1,10 @@
 #
 # This dockerfile is used only to build a new release for production
+# Take a look at Makefile or run "make help"
 #
-# docker build -t react-pendu:prod -f .docker/Dockerfile .
-# docker run -d --name react-pendu -p 8080:80 react-pendu:prod
+# Run
+# $ make release.prod
+
 
 FROM nginx:alpine
 

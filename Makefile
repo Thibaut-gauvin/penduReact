@@ -5,7 +5,8 @@
 .SILENT:
 .PHONY: tests build
 
-COMPOSE_CMD = docker-compose
+
+DOCKER_CMD = docker run --rm --tty --interactive --name node --user node --publish 3000:3000 --volume $$PWD:/home/docker --workdir /home/docker node:9-jessie
 
 
 #####
@@ -17,47 +18,47 @@ all: help
 #####
 ## Install dependencies and start development server
 start:
-	$(COMPOSE_CMD) run --rm node yarn install && yarn start
+	$(DOCKER_CMD) yarn install && yarn start
 
 
 #####
 ## Start new bash terminal inside the Nodejs Container
 ssh:
-	$(COMPOSE_CMD) run --rm node bash
+	$(DOCKER_CMD) /bin/bash
 
 
 #####
 ## Lint js code
 lint:
-	$(COMPOSE_CMD) run --rm node yarn run eslint src
+	$(DOCKER_CMD) yarn run eslint src
 
 
 #####
 ## Lint & Fix js code
 lint.fix:
-	$(COMPOSE_CMD) run --rm node yarn run eslint src --fix
+	$(DOCKER_CMD) yarn run eslint src --fix
 
 
 #####
-## Create new release of app, demo url is localhost:8080
+## Build app for production
 build.prod:
 	rm -rf build
-	$(COMPOSE_CMD) run --rm node yarn build
+	$(DOCKER_CMD) yarn build
 
 
 #####
 ## Create new release of app, demo url is localhost:8080
-release.staging: build.prod
-	docker build -t react-pendu:prod -f .docker/Dockerfile .
-	docker stop react-pendu && docker rm react-pendu
-	docker run -d --name react-pendu -p 8080:80 react-pendu:prod
+release.demo: build.prod
+	docker build -t react-pendu:demo -f .docker/Dockerfile .
+	 @docker stop react-pendu && docker rm react-pendu
+	docker run -d --name react-pendu -p 8080:80 react-pendu:demo
 
 
 #####
-## Create new release of app for production
+## Package new release of app for production
 release.prod: build.prod
 	docker login
-	docker build -t rhyu/react-pendu:prod -f .docker/Dockerfile https://github.com/Thibaut-gauvin/penduReact#master
+	docker build -t rhyu/react-pendu:prod -f .docker/Dockerfile .
 	docker push rhyu/react-pendu:prod
 
 
@@ -75,6 +76,8 @@ help:
 	@echo '| ssh             | Start new bash terminal inside the Nodejs Container                |'
 	@echo '| lint            | Lint js code                                                       |'
 	@echo '| lint.fix        | Lint & Fix js code                                                 |'
-	@echo '| release.staging | Create new release of app, demo url is localhost:8080              |'
+	@echo '| build.prod      | Build app for production                                           |'
+	@echo '| release.demo    | Create new release of app, demo url is localhost:8080              |'
+	@echo '| release.prod    | Package new release of app for production                          |'
 	@echo '+-----------------+--------------------------------------------------------------------+'
 	@echo ''
